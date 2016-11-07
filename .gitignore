@@ -1,0 +1,7 @@
+.paths
+.project
+.settings
+.vagrant-*
+_build*
+setup.data
+main.native

@@ -1,0 +1,36 @@
+{
+  "manifest-version": 1,
+  "name": "tomtom-mysports-cloud-databox-driver",
+  "version": "0.1.0",
+  "description": "Databox driver for the TomTom MySports Cloud.",
+  "author": "Dominic Price <dominic.price@nottingham.ac.uk>",
+  "license": "ISC",
+  "databox-type": "driver",
+  "tags": [
+    "gps",
+    "watch",
+    "heartrate",
+    "tomtom",
+    "runner",
+    "spark",
+    "mysports",
+    "location"
+  ],
+  
+  "homepage": "https://github.com/me-box/tomtom-mysports-cloud-databox-driver",
+  
+  "repository": {
+    "type": "git",
+      "url": "git+https://github.com/me-box/tomtom-mysports-cloud-databox-driver.git"
+    },
+  
+  "network-permissions": [
+  ],
+	
+  "hardware-permissions": [
+  ],
+  
+  "resource-requirements": {
+    "store":"datastore-timeseries"
+  }
+}

@@ -1,0 +1,14 @@
+NAME = healthgraph-databox-driver
+EXECUTABLE = main.native
+DOCKER = docker $(DOCKER_OPTS)
+
+build:
+	$(DOCKER) build -f Dockerfile.arm.build -t $(NAME):arm-build .
+	$(eval CONTAINER := $(shell docker create $(NAME):arm-build))
+	$(DOCKER) cp $(CONTAINER):/home/tc/app/_build/src/$(EXECUTABLE) .
+	$(DOCKER) rm $(CONTAINER)
+	$(DOCKER) build -t $(NAME):arm .
+	rm -f $(EXECUTABLE)
+
+clean:
+	$(DOCKER) rmi $(NAME):arm-build

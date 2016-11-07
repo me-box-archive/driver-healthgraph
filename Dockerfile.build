@@ -1,0 +1,51 @@
+FROM tatsushid/tinycore:7.2-x86_64
+
+ADD tinycore/opam.tcz /
+
+RUN sudo ln -s /lib /lib64 \
+  && tce-load -wic compiletc.tcz \
+  && tce-load -wic wget.tcz \
+  && tce-load -wic git.tcz \
+  && tce-load -wic expat2.tcz \
+  && tce-load -ic /opam.tcz \
+  && mkdir -p /home/tc/app
+  
+RUN export OPAMEXTERNALSOLVER=/usr/local/lib/aspcud/aspcud \
+  && opam init -y -a --comp=4.03.0
+
+RUN export OPAMEXTERNALSOLVER=/usr/local/lib/aspcud/aspcud \
+  && opam install oasis.0.4.7 yojson.1.3.2 lwt.2.5.2 uri.1.9.2 \
+    cohttp.0.21.0 atdgen.1.10.0 logs.0.6.2 result.1.2 config-file.1.2
+
+RUN export OPAMEXTERNALSOLVER=/usr/local/lib/aspcud/aspcud \
+  && opam pin add template https://github.com/dominicjprice/template.git \
+  && opam install template
+
+ADD src /home/tc/app/src
+ADD templates /home/tc/app/templates
+ADD _oasis /home/tc/app
+RUN sudo chown -R tc:staff /home/tc/app
+RUN sudo chmod -R ug+rw /home/tc/app
+RUN sudo wget https://code.jquery.com/jquery-3.1.1.min.js \
+    -O /home/tc/app/templates/jquery.js
+RUN sudo wget https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.18.2/URI.min.js \
+    -O /home/tc/app/templates/uri.js
+
+WORKDIR /home/tc/app/src
+RUN eval `opam config env` \
+  atdgen -t databox_directory_types.atd \
+  && atdgen -j databox_directory_types.atd
+  
+WORKDIR /home/tc/app/templates
+RUN eval `opam config env` \
+  && for f in *; do \
+    name=`echo $(basename $f) | sed -e 's/\..*//'`; \
+    template $f ../src/tpl_${name}.ml; \
+  done
+
+WORKDIR /home/tc/app
+RUN export OPAMEXTERNALSOLVER=/usr/local/lib/aspcud/aspcud \
+  && eval `opam config env` \
+  && oasis setup \
+  && ocaml setup.ml -configure \
+  && ocaml setup.ml -build

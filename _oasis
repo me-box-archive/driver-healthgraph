@@ -1,0 +1,31 @@
+OASISFormat: 0.4
+Name:        healthgraph-databox-driver
+Version:     0.1.0
+Synopsis:    Databox driver for Healthgraph.
+Description: 
+  Runs as a Docker application that connects to the Healhgraph API to periodically
+  extract data and commit to the relevant datastore.
+Authors:     Dominic Price
+Copyrights:  (C) 2016 Horizon Digital Economy Research
+LicenseFile: LICENSE
+License:     ISC
+Homepage:    https://github.com/me-box/healthgraph-databox-driver
+BuildTools:  ocamlbuild
+
+Executable main
+  Path:        src
+  Install:     true
+  MainIs:      main.ml
+  CompiledObject: native
+  NativeOpt: -ccopt '-L/home/tc/.opam/4.03.0/lib/lwt' -cclib '-static -lunix 
+    -lbigarray -lcamlstr'
+  BuildDepends:
+    lwt,
+    lwt.ppx,
+    logs,
+    cohttp.lwt,
+    uri,
+    yojson,
+    atdgen,
+    result,
+    config-file

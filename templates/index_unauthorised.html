@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Healthgraph Databox Driver</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="uri.js"></script>
+</head>
+<body>
+    <h1>Authorisation Required</h1>
+    <p>
+        In order to use the Healthgraph Databox Driver, you must first
+        allow it access to your Healthgraph online account. You can do this
+        by clicking the register link below.
+    </p>
+    <p>
+    	<a id="intermediary-uri-link" href="<%ml ?= "auth_uri" %>">Register</a>
+    </p>
+    <h2>Advanced</h2>
+    <p>
+      If you wish to use a different OAuth intermediary server, please provide
+      the URI in the field below.
+    </p>
+    <p>
+      <input id="intermediary-uri" name="intermediary-uri" size="40"
+              type="text" value="<%ml ?= "oauth_intermediary_uri" %>" />
+      <input type="button" value="Update" 
+              onclick="return update_intermediary_uri();" />
+    </p>
+    <script type="text/javascript">
+    function update_intermediary_uri() {
+    	jQuery(function($) {
+    		var uri_str = $("#intermediary-uri").val();
+    		$.post("/update-config", {
+    			"oauth_intermediary_uri" : uri_str
+    		});
+    		var uri = new URI(uri_str);
+    		uri.addQuery({
+    			"start" : "start",
+    			"origin_uri" : "<%ml ?= "origin_uri" %>"
+    		});
+			$("#intermediary-uri-link").attr("href", uri.toString());
+    	});
+    	return false;
+    }
+    </script>
+</body>
+</html>
