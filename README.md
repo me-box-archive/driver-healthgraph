@@ -1,7 +1,7 @@
-# tomtom-mysports-cloud-databox-driver
-> Databox driver for the TomTom MySports Cloud.
+# healthgraph-databox-driver
+> Databox driver for the Healthgraph API.
 
-A Databox driver for the TomTom MySports Cloud. Currently in development.
+A Databox driver for the Healthgraph API. Currently in development.
 
 ## Installation
 
@@ -33,7 +33,7 @@ licensed under the [GNU GPLv2 License][gplv2-license].
 * ``tinycore/opam.tcz`` contains software from [OPAM][opam]
 licensed under the [GNU LGPLv2.1 License][lgplv2.1-license].
 
-<https://github.com/me-box/tomtom-mysports-cloud-databox-driver>
+<https://github.com/me-box/healthgraph-databox-driver>
 
 [docker]: https://www.docker.com/
 [apache-2.0-license]: https://github.com/docker/docker/blob/master/LICENSE

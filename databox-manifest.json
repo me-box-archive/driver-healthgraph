@@ -1,27 +1,21 @@
 {
   "manifest-version": 1,
-  "name": "tomtom-mysports-cloud-databox-driver",
+  "name": "healthgraph-databox-driver",
   "version": "0.1.0",
-  "description": "Databox driver for the TomTom MySports Cloud.",
+  "description": "Databox driver for the Healthgraph API.",
   "author": "Dominic Price <dominic.price@nottingham.ac.uk>",
   "license": "ISC",
   "databox-type": "driver",
   "tags": [
-    "gps",
-    "watch",
     "heartrate",
-    "tomtom",
-    "runner",
-    "spark",
-    "mysports",
     "location"
   ],
   
-  "homepage": "https://github.com/me-box/tomtom-mysports-cloud-databox-driver",
+  "homepage": "https://github.com/me-box/healthgraph-databox-driver",
   
   "repository": {
     "type": "git",
-      "url": "git+https://github.com/me-box/tomtom-mysports-cloud-databox-driver.git"
+      "url": "git+https://github.com/me-box/healthgraph-databox-driver.git"
     },
   
   "network-permissions": [
@@ -31,6 +25,6 @@
   ],
   
   "resource-requirements": {
-    "store":"datastore-timeseries"
+    "store":"datastore-blob"
   }
 }
